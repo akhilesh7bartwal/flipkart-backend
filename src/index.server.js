@@ -36,7 +36,4 @@ app.post('/data',(req,res,next) =>{
 app.listen(process.env.PORT, ()=>{
     console.log(`Server in running on port ${process.env.PORT}`);
 })
-<<<<<<< HEAD
-=======
-//hihihi
->>>>>>> origin/main
+
