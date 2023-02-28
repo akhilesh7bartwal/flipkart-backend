@@ -4,6 +4,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 
+//routes
+const userRoutes= require("./routes/user.js");
+
 //enviorment vaiables or you can say constants
 env.config();
 
@@ -12,7 +15,8 @@ env.config();
 mongoose.connect(`mongodb+srv://akhilesh:${process.env.MONGO_DB_PASSWORD}@cluster0.ma5a9.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+
   }
 ).then(()=>{
     console.log("database connected.");
@@ -20,20 +24,12 @@ mongoose.connect(`mongodb+srv://akhilesh:${process.env.MONGO_DB_PASSWORD}@cluste
 
 
 app.use(bodyParser());
+app.use('/api', userRoutes);
 
-app.get('/',(req,res,next) => {
-    res.status(200).json({
-        message: 'Hello from Server',
-    })
-})
-
-app.post('/data',(req,res,next) =>{
-    res.status(200).json({
-        message: req.body
-    });
-});
+//console.log(userRoutes);
 
 app.listen(process.env.PORT, ()=>{
     console.log(`Server in running on port ${process.env.PORT}`);
 })
 
+  
